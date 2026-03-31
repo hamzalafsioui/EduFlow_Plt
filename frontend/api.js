@@ -73,3 +73,8 @@ export const teacherApi = {
     getCourseGroups:  (courseId)     => apiFetch(`/teacher/courses/${courseId}/groups`),
     getGroupStudents: (courseId, gId)=> apiFetch(`/teacher/courses/${courseId}/groups/${gId}/students`),
 };
+
+/* ====== Categories ====== */
+export const categoryApi = {
+    getAll: () => apiFetch('/categories'),
+};
