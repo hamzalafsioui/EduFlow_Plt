@@ -1,14 +1,9 @@
 import { renderPage, navigate } from '../router.js';
-import { authApi } from '../api.js';
+import { authApi, categoryApi } from '../api.js';
 import { toast } from '../components/toast.js';
 
-const INTERESTS = [
-    'Mathematics', 'Science', 'Technology', 'Programming',
-    'Design', 'Business', 'Languages', 'History',
-    'Music', 'Art', 'Literature', 'Health'
-];
-
 export async function registerPage() {
+    // Initial skeleton or loading state
     renderPage(`
         <div class="auth-page">
             <div class="auth-card" style="max-width:520px;">
@@ -54,9 +49,7 @@ export async function registerPage() {
                     <div id="interests-section" class="form-group hidden">
                         <label>Your Interests <span style="color:var(--clr-text-dim); font-weight:400;">(select all that apply)</span></label>
                         <div class="interest-grid" id="interest-grid">
-                            ${INTERESTS.map(i => `
-                                <div class="interest-chip" data-interest="${i}">${i}</div>
-                            `).join('')}
+                            <p style="color:var(--clr-text-dim); grid-column: 1/-1;">Loading categories...</p>
                         </div>
                     </div>
 
@@ -71,6 +64,25 @@ export async function registerPage() {
             </div>
         </div>
     `);
+
+    // Fetch categories and render chips
+    try {
+        const res = await categoryApi.getAll();
+        if (res.ok) {
+            const categories = await res.json();
+            const grid = document.getElementById('interest-grid');
+            if (grid) {
+                grid.innerHTML = categories.map(cat => `
+                    <div class="interest-chip" data-id="${cat.id}">${cat.name}</div>
+                `).join('');
+            }
+        } else {
+            console.error('Failed to load categories');
+            document.getElementById('interest-grid').innerHTML = '<p class="form-error">Failed to load interests.</p>';
+        }
+    } catch (err) {
+        console.error('Error fetching categories:', err);
+    }
 
     // Show interests only for students
     document.getElementById('reg-role').addEventListener('change', (e) => {
@@ -99,7 +111,7 @@ export async function registerPage() {
         const password = document.getElementById('reg-password').value;
         const role     = document.getElementById('reg-role').value;
         const interests = [...document.querySelectorAll('.interest-chip.selected')]
-                            .map(c => c.dataset.interest);
+                            .map(c => parseInt(c.dataset.id));
 
         errEl.classList.add('hidden');
         errEl.textContent = '';
