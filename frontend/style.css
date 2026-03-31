@@ -237,6 +237,23 @@ input, select, textarea { font-family: inherit; }
 .role-badge--teacher { background: rgba(124,58,237,0.2); color: var(--clr-primary-l); }
 .role-badge--student { background: rgba(79,70,229,0.2); color: var(--clr-accent-l); }
 
+.user-name {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  display: inline-flex;
+}
+
+@media (max-width: 640px) {
+  .user-name, .role-badge, .btn-logout {
+    display: none;
+  }
+}
+
 /* ── Glass Card ── */
 .card {
   background: var(--clr-surface);
@@ -318,6 +335,7 @@ input, select, textarea { font-family: inherit; }
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
