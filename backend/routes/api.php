@@ -4,9 +4,15 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PasswordResetController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\WishlistController;
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\EnrollmentController;
+
+Route::get('categories', [CategoryController::class, 'index']);
+
+// Public Stripe callback - no auth header is present on browser redirects
+Route::get('courses/{course}/enroll/success', [EnrollmentController::class, 'success']);
 
 Route::group([
     'middleware' => 'api',
@@ -39,7 +45,6 @@ Route::middleware(['api', 'auth:api'])->group(function () {
 
     // Enrollment
     Route::post('courses/{course}/checkout', [EnrollmentController::class, 'checkout']);
-    Route::get('courses/{course}/enroll/success', [EnrollmentController::class, 'success']);
     Route::delete('courses/{course}/enroll', [EnrollmentController::class, 'withdraw']);
 
     // Wishlist Management
