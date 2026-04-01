@@ -71,9 +71,14 @@ class EnrollmentController extends Controller
     public function success(string $courseId, Request $request)
     {
         try {
-            $user = Auth::user();
-            $this->enrollmentService->confirmEnrollment($user, (int)$courseId);
-            return response()->json(['message' => 'Enrollment successful!']);
+            $sessionId = $request->query('session_id');
+            if (!$sessionId) {
+                return response()->json(['error' => 'Missing session_id.'], 400);
+            }
+            $this->enrollmentService->confirmEnrollmentBySession($sessionId);
+            // Redirect to root so the static server always serves index.html.
+            $frontendUrl = env('FRONTEND_URL', 'http://127.0.0.1:5173');
+            return redirect($frontendUrl . '/frontend/index.html?enrolled=success#/my-enrollments');
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
