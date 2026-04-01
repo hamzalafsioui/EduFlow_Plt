@@ -67,6 +67,33 @@ class EnrollmentService
         return true;
     }
 
+    public function confirmEnrollmentBySession(string $sessionId)
+    {
+        Stripe::setApiKey(env('STRIPE_SECRET', 'sk_test_simulated'));
+
+        $session = Session::retrieve($sessionId);
+
+        if ($session->payment_status !== 'paid') {
+            throw new Exception('Payment not completed.');
+        }
+
+        $userId   = $session->metadata['user_id'] ?? null;
+        $courseId = $session->metadata['course_id'] ?? null;
+
+        if (!$userId || !$courseId) {
+            throw new Exception('Invalid session metadata.');
+        }
+
+        // Idempotency guard => don’t double-enroll
+        if ($this->enrollmentRepository->isEnrolled($userId, $courseId)) {
+            return true;
+        }
+
+        $this->enrollmentRepository->enroll($userId, $courseId);
+        $this->groupService->assignStudentToGroup($userId, $courseId);
+        return true;
+    }
+
     public function withdraw($user, $courseId)
     {
         if (!$user->isStudent()) {
