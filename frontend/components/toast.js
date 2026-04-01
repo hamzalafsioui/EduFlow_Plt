@@ -13,16 +13,30 @@ function getContainer() {
 
 
 export function showToast(message, type = 'info', duration = 4000) {
-    const icons = { success: '-)', error: '(-_-)', info: '(--)', warning: '(-' };
+    const icons = { 
+        success: 'check-circle', 
+        error: 'alert-circle', 
+        info: 'info', 
+        warning: 'alert-triangle' 
+    };
     const c = getContainer();
 
     const toast = document.createElement('div');
     toast.className = `toast toast--${type}`;
     toast.innerHTML = `
-        <span class="toast__icon">${icons[type]}</span>
+        <span class="toast__icon"><i data-lucide="${icons[type]}"></i></span>
         <span class="toast__msg">${message}</span>
-        <button class="toast__close" aria-label="Dismiss">✕</button>
+        <button class="toast__close" aria-label="Dismiss"><i data-lucide="x"></i></button>
     `;
+
+    if (window.lucide) {
+        window.lucide.createIcons({
+            props: {
+                class: 'lucide'
+            },
+            node: toast
+        });
+    }
 
     toast.querySelector('.toast__close').addEventListener('click', () => dismiss(toast));
     c.appendChild(toast);
