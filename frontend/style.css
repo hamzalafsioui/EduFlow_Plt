@@ -103,6 +103,26 @@ a:hover { color: var(--clr-text); }
 img { max-width: 100%; display: block; }
 button { cursor: pointer; font-family: inherit; }
 input, select, textarea { font-family: inherit; }
+.lucide {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2.25px;
+  vertical-align: middle;
+}
+.lucide-lg { width: 3rem !important; height: 3rem !important; }
+.lucide-xl { width: 5rem !important; height: 5rem !important; }
+.btn .lucide {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.btn-sm .lucide {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+.btn-lg .lucide {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 
 /* ── Layout ── */
 #app { min-height: 100vh; display: flex; flex-direction: column; }
