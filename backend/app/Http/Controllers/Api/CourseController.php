@@ -49,7 +49,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = $this->courseService->getAllCourses();
+        $user = Auth::user();
+        $courses = $this->courseService->getAllCourses($user);
+
         return response()->json($courses);
     }
 
