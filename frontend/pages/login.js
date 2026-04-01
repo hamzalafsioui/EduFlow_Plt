@@ -7,7 +7,7 @@ export async function loginPage() {
         <div class="auth-page">
             <div class="auth-card">
                 <div class="auth-card__logo">
-                    <div class="auth-card__logo-text">🎓 EduFlow</div>
+                    <div class="auth-card__logo-text"><i data-lucide="graduation-cap"></i> EduFlow</div>
                     <div class="auth-card__subtitle">Learn. Grow. Succeed.</div>
                 </div>
 
@@ -69,7 +69,7 @@ export async function loginPage() {
 
             localStorage.setItem('eduflow_token', data.access_token);
             localStorage.setItem('eduflow_user',  JSON.stringify(data.user));
-            toast.success(`Welcome back, ${data.user.name}! -)`);
+            toast.success(`Welcome back, ${data.user.name}!`);
 
             navigate(data.user.role === 'teacher' ? '/dashboard' : '/courses');
         } catch (err) {

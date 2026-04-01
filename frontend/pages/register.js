@@ -8,7 +8,7 @@ export async function registerPage() {
         <div class="auth-page">
             <div class="auth-card" style="max-width:520px;">
                 <div class="auth-card__logo">
-                    <div class="auth-card__logo-text">🎓 EduFlow</div>
+                    <div class="auth-card__logo-text"><i data-lucide="graduation-cap"></i> EduFlow</div>
                     <div class="auth-card__subtitle">Join thousands of learners</div>
                 </div>
 
