@@ -4,12 +4,22 @@ namespace App\Repositories;
 
 use App\Models\Course;
 use App\Repositories\Contracts\CourseRepositoryInterface;
+use App\Models\User;
 
 class CourseRepository implements CourseRepositoryInterface
 {
-    public function all()
+    public function all(?User $user = null)
     {
-        return Course::with(['teacher', 'category'])->get();
+        $courses = Course::with(['teacher', 'category'])->get();
+
+        if ($user && $user->isStudent()) {
+            $enrolledIds = $user->enrolledCourses()->pluck('courses.id')->flip();
+            $courses->each(function ($course) use ($enrolledIds) {
+                $course->enrollment_status = $enrolledIds->has($course->id) ? 'confirmed' : null;
+            });
+        }
+
+        return $courses;
     }
 
     public function find(int $id)
