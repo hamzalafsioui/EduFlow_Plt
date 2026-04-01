@@ -6,7 +6,7 @@ use App\Models\Course;
 
 interface CourseRepositoryInterface
 {
-    public function all();
+    public function all(?\App\Models\User $user = null);
     public function find(int $id);
     public function create(array $data);
     public function update(int $id, array $data);

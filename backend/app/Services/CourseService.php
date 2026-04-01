@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\CourseRepositoryInterface;
+use App\Models\User;
 
 class CourseService
 {
@@ -13,9 +14,9 @@ class CourseService
         $this->courseRepository = $courseRepository;
     }
 
-    public function getAllCourses()
+    public function getAllCourses(?User $user = null)
     {
-        return $this->courseRepository->all();
+        return $this->courseRepository->all($user);
     }
 
     public function getCourseById(int $id)
