@@ -1,50 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO -->
     <title>EduFlow — Learn. Grow. Succeed.</title>
-    <meta name="description" content="EduFlow is a modern e-learning platform where students can discover and enroll in courses taught by expert instructors, and teachers can create and manage their curriculum.">
-    <meta name="keywords" content="EduFlow, e-learning, online courses, education platform, students, teachers">
-    <meta name="author" content="EduFlow">
+    <meta
+      name="description"
+      content="EduFlow is a modern e-learning platform where students can discover and enroll in courses taught by expert instructors, and teachers can create and manage their curriculum."
+    />
+    <meta
+      name="keywords"
+      content="EduFlow, e-learning, online courses, education platform, students, teachers"
+    />
+    <meta name="author" content="EduFlow" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="EduFlow — Learn. Grow. Succeed.">
-    <meta property="og:description" content="Discover courses, enroll, and track your progress on EduFlow.">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="EduFlow — Learn. Grow. Succeed." />
+    <meta
+      property="og:description"
+      content="Discover courses, enroll, and track your progress on EduFlow."
+    />
+    <meta property="og:type" content="website" />
 
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>"
+    />
 
     <!-- Fonts + Styles -->
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
     <!--  App Shell  -->
     <div id="app">
+      <!-- Navbar Mount -->
+      <header id="navbar">
+        <!-- Rendered by navbar.js component -->
+      </header>
 
-        <!-- Navbar Mount -->
-        <header id="navbar">
-            <!-- Rendered by navbar.js component -->
-        </header>
-
-        <!-- Page Content Mount -->
-        <main id="page-content" role="main" aria-live="polite">
-            <!-- Pages rendered here by the router -->
-            <div class="loading-overlay" style="min-height:100vh;">
-                <div class="spinner spinner--lg"></div>
-                <span style="color:var(--clr-text-muted);">Loading EduFlow...</span>
-            </div>
-        </main>
-
+      <!-- Page Content Mount -->
+      <main id="page-content" role="main" aria-live="polite">
+        <!-- Pages rendered here by the router -->
+        <div class="loading-overlay" style="min-height: 100vh">
+          <div class="spinner spinner--lg"></div>
+          <span style="color: var(--clr-text-muted)">Loading EduFlow...</span>
+        </div>
+      </main>
     </div>
 
-
     <!-- App Entry Point -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script type="module" src="./app.js"></script>
-
-</body>
+  </body>
 </html>
